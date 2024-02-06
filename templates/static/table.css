@@ -1,0 +1,119 @@
+.table-form
+{
+    overflow: visible;
+}
+table {
+    border-collapse: collapse;
+}
+
+th {
+    border: 2px solid var(--bg-color);
+    padding: 8px 16px;
+    text-align: center;
+    background-color: var(--third-bg-color);
+    color: var(--second-bg-color);
+    border: 2px solid var(--bg-color);
+    font-weight: 500;
+    font-size: 0.7dvw;
+}
+
+td
+{
+    border: 2px solid var(--bg-color);
+}
+
+.calculator-container
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.input-container,
+.output-container
+{
+    position: relative;
+    display: flex;
+    gap: 10px;
+    width: 80dvw;
+    margin-left: -17dvw;
+}
+
+.output-container
+{
+    padding-top: 30px;
+}
+
+input[type="number"],
+input[type="text"],
+input[type="date"],select {
+    width: 200px;
+}
+
+
+.table_data input,
+.table_data select
+{
+    border: none;
+    background: none;
+}
+
+.table-buttons
+{
+    display: flex;
+    gap: 1.5vw;
+    padding-bottom: 20px;    
+}
+
+.table-event
+{
+    background: none;
+    border: 2px solid var(--bg-color);
+    border-radius: 5%;
+    height: 40px;
+    padding: 0 1.5dvw;
+    width: auto;
+}
+
+.bx.bxs-trash
+{
+    padding: 2px 2px;
+    font-size: 20px;
+}
+
+.bx.bx-plus
+{
+    font-size: 30px;
+}
+
+.delete-btn
+{
+    background: transparent;
+    border: none;
+}
+
+
+/* Add this style for the pop-up container */
+.popup-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Add this style for the pop-up table */
+.popup-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+
+.popup-table th, .popup-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}

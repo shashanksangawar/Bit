@@ -1,0 +1,267 @@
+.slider {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0.4em 0;
+}
+.slider:focus {
+    outline: none;
+}
+.slider::-webkit-slider-runnable-track {
+    background-color: #444;
+    height: 0.3em;
+    margin: 0.4em 0;
+    border-radius: 2px;
+}
+.slider::-moz-range-track {
+    background-color: #444;
+    height: 0.3em;
+    border-radius: 2px;
+}
+.slider::-moz-focus-outer {
+    border: 0;
+}
+.slider::-ms-track {
+    background-color: #444;
+    height: 0.3em;
+    margin: 0.1em 0;
+    border-radius: 2px;
+}
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #fff;
+    text-align: center;
+    width: 1.2em;
+    height: 1.2em;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+    box-sizing: border-box;
+    margin-top: -0.5em;
+}
+.slider::-moz-range-thumb {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #fff;
+    text-align: center;
+    width: 1.2em;
+    height: 1.2em;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+.slider::-ms-thumb {
+    margin: 0;
+}
+
+.calculator-container.display 
+{
+    display: none;
+}
+.chart-container.display 
+{
+    display: none;
+}
+
+form,
+.fixed-deposits-form
+{
+    overflow: auto;
+    overflow: scroll;
+}
+
+.calculator-container
+{
+    padding-top: 5dvh;
+    margin-left: 15dvh;
+    display: flex;
+    align-items: center;
+}
+
+.fixed-deposits-form p
+{
+    padding: 0 0.7dvw;
+    color: var(--bg-color);
+    font-size: 0.7dvw;
+}
+
+.inputs
+{
+    background: none;
+    border: none;
+    border-bottom: 2px solid var(--bg-color);
+    height: 40px;
+    padding: 0 0.7dvw;
+    width: 250px
+}
+
+select
+{
+    background: none;
+    border: none;
+    border-bottom: 2px solid var(--bg-color);
+    height: 40px;
+    padding: 0 0.7dvw;
+    width: 250px
+}
+
+
+  /* Style the options */
+  select option {
+    background-color: rgb(0, 193, 193); /* Background color for options */
+    border: rgb(0, 193, 193);; /* Remove border for options */
+    padding: 8px; /* Adjust padding for options */
+  }
+  
+  /* Style when focused */
+  select:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1); /* Add a subtle box shadow */
+  }
+  
+  
+
+  
+
+input::placeholder
+{
+    color: rgba(17, 16, 30, 0.74);
+}
+
+.input-button
+{
+    background: none;
+    border: 2px solid var(--bg-color);
+    border-radius: 5%;
+    height: 40px;
+    padding: 0 1.5dvw;
+}
+
+#reset
+{
+    margin-left: 1dvh;
+    padding: 0 2.2dvw;
+}
+
+.output
+{
+    margin-right: 500px;
+    margin-top: 500px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 10px 20px;
+    border: 2px solid var(--bg-color);
+}
+
+.output h1
+{
+    font-weight: 500;
+}
+
+.chart-container
+{
+    overflow: hidden;
+    position: relative;
+    padding-top: 10dvh;
+    display: flex;
+    gap: 10dvh;
+    top: 0;
+    right: 0;
+    margin: 10px;
+    flex-direction: column;
+}
+
+.charts-1, .charts-2
+{
+    width: 100dvw;
+    display: flex;
+    justify-content:space-around;
+}
+
+#lineChart, #difference-chart , #Biforgation-chart
+{
+    width: 30dvw;
+    height: 30dvh;
+}
+
+@media screen and (max-width: 400px)
+{
+    .sidebar .login-section
+    {
+        width: 66dvw;
+    }
+
+    .home-section
+    {
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    .home-section h1
+    {
+        font-size: 7dvw;
+    }
+
+    .fixed-deposits-form p
+    {
+        font-size: 4dvw;
+    }
+
+    .fixed-deposits-form .inputs,
+    .fixed-deposits-form .select
+    {
+        width:60dvw;
+    }
+
+    .calculator-container 
+    {
+        padding-top: 5dvh; /* Adjust this value as needed */
+        margin-left: -1dvw;
+        display: flex;
+        align-items: center;
+        flex-direction: column; /* Change to a column layout */
+    }
+      
+    .chart-container 
+    {
+        /* Adjust positioning and styling for the chart container */
+        padding-top: 10vh;
+        padding-right: 10vh;
+        display: flex;
+        flex-direction: column; /* Place the chart below the calculator */
+    }
+    
+    .charts-1, .charts-2
+    {
+        width : 65dvw;
+        display: flex;
+        flex-direction: column;
+        gap: 10dvw;
+    }
+
+    #lineChart
+    {
+        width: 35dvw;
+        height: 35dvh;
+    }
+
+    #difference-chart
+    {
+        width: 35dvw;
+        height: 25dvh;
+    }
+
+    #Biforgation-chart
+    {
+        width: 35vw;
+        height: 35vh;
+    }
+
+}
+

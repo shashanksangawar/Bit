@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <title>Finoplex </title>
+    <link rel="stylesheet" href="static/style.css">
+    <!-- Boxiocns CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+  {% macro common_elements() %}
+  <div class="sidebar close">
+    <div class="logo-details">
+        <i class='bx bx-rupee'></i>
+      <span class="logo_name">.भारतit</span>
+    </div>
+    <ul class="nav-links">
+      <li>
+        <a href="#">
+            <i class='bx bxs-dashboard' ></i>
+          <span class="link_name">Dashboard</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Dashboard</a></li>
+        </ul>
+      </li>
+      <li>
+        <div class="iocn-link">
+          <a href="#">
+            <i class='bx bxs-calculator' ></i>
+            <span class="link_name">Calculators</span>
+          </a>
+          <i class='bx bxs-chevron-down arrow' ></i>
+        </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" href="#">Calculators</a></li>
+          <li><a href="/fixed_deposits">Fixed Deposits</a></li>
+          <li><a href="#">Currency</a></li>
+          <li><a href="#">Metals</a></li>
+          <li><a href="#">Mutual Funds</a></li>
+          <li><a href="#">Securities</a></li>
+          <li><a href="#">Soverign Gold Bonds</a></li>
+          <li><a href="#">Post Office Deposits</a></li>
+          <li><a href="#">RITS & INVITS</a></li>
+          <li><a href="#">Tax Calculator</a></li>
+        </ul>
+      </li>
+      <li>
+        <div class="iocn-link">
+          <a href="#">
+            <i class='bx bx-code-curly'></i>
+            <span class="link_name">API</span>
+          </a>
+          <i class='bx bxs-chevron-down arrow' ></i>
+        </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" href="#">API</a></li>
+          <li><a href="#">Fixed Deposits</a></li>
+          <li><a href="#">Currency</a></li>
+          <li><a href="#">Metals</a></li>
+          <li><a href="#">Mutual Funds</a></li>
+          <li><a href="#">Securities</a></li>
+          <li><a href="#">Soverign Gold Bonds</a></li>
+          <li><a href="#">Post Office Deposits</a></li>
+          <li><a href="#">RITS & INVITS</a></li>
+          <li><a href="#">Tax Calculator</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bx-pie-chart-alt-2' ></i>
+          <span class="link_name">Analytics</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Analytics</a></li>
+        </ul>
+      </li>
+      <li>
+        <div class="iocn-link">
+          <a href="#">
+            <i class='bx bx-plug' ></i>
+            <span class="link_name">Socials</span>
+          </a>
+          <i class='bx bxs-chevron-down arrow' ></i>
+        </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" href="#">Socials</a></li>
+          <li><a href="#">Youtube</a></li>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Github</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bx-compass' ></i>
+          <span class="link_name">Learnings</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Learnings</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bx-cog' ></i>
+          <span class="link_name">Setting</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Setting</a></li>
+        </ul>
+      </li>
+      <li>
+    <div class="profile-details">
+      <div class="profile-content">
+      </div>
+      <div class="name-job">
+        <div class="profile_name">Prem Shahi</div>
+        <div class="job">Web Desginer</div>
+      </div>
+      <div class="logout">
+        <i class='bx bx-log-out' id="logout"></i>
+      </div>
+    </div>
+
+    <div class="login-section">
+      <div class="login-content">
+        <button class="login">
+          <a href=""><i class='bx bx-log-in' id="login"></i><h1>Login</h1></a>
+        </button>
+      </div>
+      
+    </div>
+  </li>
+</ul>
+  </div>
+  {% endmacro %}
+
+  {{common_elements()}}
+  <section class="home-section">
+    <div class="home-content">
+      <i class='bx bx-menu' ></i>
+      <span class="text">Finoplex</span>
+    </div>
+  </section>
+  <script src="static/script.js"></script>
+
+{% macro common_elements_end() %}
+</body>
+</html>
+{% endmacro %}
+{{common_elements_end()}}

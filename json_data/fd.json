@@ -1,0 +1,30 @@
+{
+    "apikey": "4f6cf513f9c56a5cde0d104f8c42c86376d85ab98bbeef0d1e5f81272dff3c6c",
+    "no_of_slices": 3,
+    "no_of_instruments": 1,
+    "slicing_periods": {
+        "0": {
+            "slice_start":"05/04/2023",
+            "slice_end": "06/04/2023"
+        },
+        "1": {
+            "slice_start":"05/04/2023",
+            "slice_end": "06/04/2023"
+        },
+        "2": {
+            "slice_start":"05/04/2023",
+            "slice_end": "06/04/2023"
+        }
+    },
+    "instruments": {
+        "0": {
+            "compounding_period": 4,
+            "principal": 42726,
+            "interest_rate": 0.07,
+            "start_date": "05/04/2023",
+            "end_date": "08/04/2024",
+            "type": "CDR",
+            "interest_payment_period": 0
+        }
+    }
+}
