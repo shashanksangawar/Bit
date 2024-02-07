@@ -49,12 +49,31 @@ input[type="date"],select {
     width: 200px;
 }
 
+.action
+{
+    border-bottom: 2px solid black;
+}
 
 .table_data input,
 .table_data select
 {
     border: none;
     background: none;
+}
+
+.headers
+{
+    width: 150px;
+}
+
+.header
+{
+    border-bottom: 2px solid black;
+    display: flex;
+    gap: 50px;
+    padding-bottom: 20px;  
+    font-size: large;
+    flex-wrap: wrap;
 }
 
 .table-buttons
@@ -91,29 +110,3 @@ input[type="date"],select {
     border: none;
 }
 
-
-/* Add this style for the pop-up container */
-.popup-container {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    border: 1px solid #ccc;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Add this style for the pop-up table */
-.popup-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 10px;
-}
-
-.popup-table th, .popup-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}

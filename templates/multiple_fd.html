@@ -2,204 +2,115 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Fixed Deposits</title>
-    <link rel="stylesheet" href="static/style.css">
-    <link rel="stylesheet" href="static/fixed_deposits.css">
-    <link rel="stylesheet" href="static/table.css">
+    <link rel="stylesheet" href="static/style.css" />
+    <link rel="stylesheet" href="static/fixed_deposits.css" />
+    <link rel="stylesheet" href="static/table.css" />
     <!-- CDN Links -->
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link
+      href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+      rel="stylesheet"
+    />
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   </head>
-<body>
-{{common_elements()}}  
-<section class="home-section">
-    <div class="home-content">
-      <i class='bx bx-menu' ></i>
-      <span class="text"><h1>Fixed Deposits</h1></span>
-    </div>
-    <section class="calculator-container">
-      <div class="output-container">
-        <form method="post" class="table-form">
-          <div class="table-buttons">
-            <button onclick="addRow()" class="table-event">Add Row</button>
-            <input type="hidden" id="rowCountInput" name="rowCount" value="1">
-            <input type="submit" value="Calculate" onclick="showPopup(); return false;" class="table-event">
-            <!-- <input type="submit" value="Calculate" onclick="submitForm()" class="table-event"> -->
-              <!-- Add this container for the pop-up table -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+
+  <body>
+    {{common_elements()}}
+    <section class="home-section">
+      <div class="home-content">
+        <i class="bx bx-menu"></i>
+        <span class="text">
+          <h1>Fixed Deposits</h1>
+        </span>
+      </div>
+      <section class="calculator-container">
+        <div class="output-container">
+          <!--form method="post" class="table-form"-->
+          <div class="table-form">
+            <div class="table-buttons">
+              <button onclick="addRow()" class="table-event">Add Row</button>
+              <input
+                type="submit"
+                value="Calculate"
+                onclick="showPopup(); return false;"
+                class="table-event"
+              />
+            </div>
+            <div id="tableContainer"></div>
           </div>
-          <div id="tableContainer"></div>
-        </form>
-      </div>
-      </div>
+        </div>
+      </section>
     </section>
-    
-</section>
 
-<script src="static/script.js"></script>
+    <script src="static/script.js"></script>
 <script>
-  var rowCount = 1; // Initial row count
-  var maxRows = 100; // Maximum allowed rows
+    var maxRows = 100; // Maximum allowed rows
+    var id = 1; // Initialize the JavaScript id variable with the Jinja id variable
+    // Display the initial default row
+    createTablewithHeader(id);
 
-  // Display the initial default row
-  createTable(rowCount);
+    function addRow() 
+    {
+        if (id < maxRows) 
+        {
+          id++; // Increment the JavaScript id variable
+          createTable(id);
+        }
+    }
 
-  function addRow() {
-      if (rowCount < maxRows) {
-          rowCount++;
-          createTable(rowCount);
+    function createTable(id) 
+    {
+        var tablehtml = "";
+        tablehtml += "<div id='" + id + "' class='calculator-table'>";
+        tablehtml += "<input type='text' class='inputs' id='start' name='principal' placeholder='Principal' required>";
+        tablehtml += '<input type="text" class="inputs" id="rate" name="rate" placeholder="Interest Rate (%)" required>';
+        tablehtml += '<input type="date" class="inputs" id="start" name="start" placeholder="Start Date of Deposit" required>';
+        tablehtml += '<input type="date" class="inputs" id="maturity" name="maturity" placeholder="Maturity Date of Deposit" required>';
+        tablehtml += '<select name="compound" id="compounding" required class="select"><option value="0">No Compounding</option><option value="1">Yearly</option><option value="2">Half-Yearly</option><option value="3">Four-Monthly</option><option value="4">Quarterly</option><option value="6">Bi-Monthly</option><option value="12">Monthly</option></select>';
+        tablehtml += '<select name="payout" id="payout" required class="select"><option value="0">On Maturity</option><option value="1">Yearly</option><option value="2">Half-Yearly</option><option value="3">Four-Monthly</option><option value="4">Quarterly</option><option value="6">Bi-Monthly</option><option value="12">Monthly</option></select>';
+        tablehtml += '&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="action" name="deleteCheckbox" checked>';
+        tablehtml += '&nbsp;&nbsp;<button class="delete-btn" class="action" onclick="deleteRow(\'' + id + '\')"><i class="bx bxs-trash"></i></button>';
+        tablehtml += "</div>";
+        document.getElementById("tableContainer").innerHTML += tablehtml;
+    }
+
+      function createTablewithHeader(id) {
+        var tablehtml = "";
+
+        // Header
+        tablehtml += "<div class='header'>";
+        tablehtml += "<span class='headers'>Principal</span>";
+        tablehtml += '<span class="headers">Interest Rate (%)</span>';
+        tablehtml += '<span class="headers">Start Date of Deposit</span>';
+        tablehtml += '<span class="headers">Maturity Date of Deposit</span>';
+        tablehtml += '<span class="headers">Compounding</span>';
+        tablehtml += '<span class="headers">Interest Payout Period</span>';
+        tablehtml += '<span class="headers">Action</span>';
+        tablehtml += "";
+        tablehtml += "</div>";
+
+        // Row
+        tablehtml += "<div id='" + id + "' class='calculator-table'>";
+        tablehtml += "<input type='text' class='inputs' id='start' name='principal' placeholder='Principal' required>";
+        tablehtml += '<input type="text" class="inputs" id="rate" name="rate" placeholder="Interest Rate (%)" required>';
+        tablehtml += '<input type="date" class="inputs" id="start" name="start" placeholder="Start Date of Deposit" required>';
+        tablehtml += '<input type="date" class="inputs" id="maturity" name="maturity" placeholder="Maturity Date of Deposit" required>';
+        tablehtml += '<select name="compound" id="compounding" required class="select"><option value="0">No Compounding</option><option value="1">Yearly</option><option value="2">Half-Yearly</option><option value="3">Four-Monthly</option><option value="4">Quarterly</option><option value="6">Bi-Monthly</option><option value="12">Monthly</option></select>';
+        tablehtml += '<select name="payout" id="payout" required class="select"><option value="0">On Maturity</option><option value="1">Yearly</option><option value="2">Half-Yearly</option><option value="3">Four-Monthly</option><option value="4">Quarterly</option><option value="6">Bi-Monthly</option><option value="12">Monthly</option></select>';
+        tablehtml += '&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="action" name="deleteCheckbox" checked>';
+        tablehtml += '&nbsp;&nbsp;<button class="delete-btn" class="action" onclick="deleteRow(' + id + ')"><i class="bx bxs-trash"></i></button>';
+        tablehtml += "</div>";
+        document.getElementById("tableContainer").innerHTML += tablehtml;
       }
-  }
 
-  function createTable(selectedRowCount) 
-  {
-    tableHTML += '<th><input type="checkbox" id="selectAllCheckbox" onclick="toggleSelectAll()"> Select All</th>';
-    var columnNames = ["Principal", "Interest Rate", "Start Date of Deposit", "Maturity Date of Deposit", "Compounding", "Interest Payout Period", "Select", "Delete"];
-    var tableHTML = '<table id="dataTable">';
-    tableHTML += '<thead><tr>';
-    for (var i = 0; i < columnNames.length; i++) {
-        tableHTML += '<th>' + columnNames[i] + '</th>';
+    function deleteRow(id)
+    {
+        console.log(id);
+        var row = document.getElementById(id);
+        row.parentNode.removeChild(row);
     }
-    tableHTML += '</tr></thead>';
-    tableHTML += '<tbody>';
-    for (var i = 1; i <= selectedRowCount; i++) {
-        tableHTML += '<tr>';
-        tableHTML += '<td class="table_data"><input type="text" class="input" id="start" name="principal'+ i +'" placeholder="  Principal" required></td>';
-        tableHTML += '<td class="table_data"><input type="text" class="inputs" id="rate" name="rate'+ i +'" placeholder="Interest Rate (%)" required></td>';
-        tableHTML += '<td class="table_data"><input type="date" class="input" id="start" name="start'+ i +'" placeholder="Start Date of Deposit" required></td>';
-        tableHTML += '<td class="table_data"><input type="date" class="inputs" id="maturity" name="maturity'+ i +'" placeholder="Maturity Date of Deposit" required></td>';
-        tableHTML += '<td class="table_data"><select name="compound'+ i +'" id="compounding" required class="select"><option value="0">No Compounding</option><option value="1">Yearly</option><option value="2">Half-Yearly</option><option value="3">Four-Monthly</option><option value="4">Quarterly</option><option value="6">Bi-Monthly</option><option value="12">Monthly</option></select></td>';
-        tableHTML += '<td class="table_data"><select name="payout'+ i +'" id="payout" required class="select"><option value="0">On Maturity</option><option value="1">Yearly</option><option value="2">Half-Yearly</option><option value="3">Four-Monthly</option><option value="4">Quarterly</option><option value="6">Bi-Monthly</option><option value="12">Monthly</option></select></td>';
-        tableHTML += '<td class="table_data">&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="deleteCheckbox" checked></td>';
-        tableHTML += '<td class="table_data">&nbsp;&nbsp;&nbsp;&nbsp;<button class="delete-btn" onclick="deleteRow(this.parentNode.parentNode)"><i class="bx bxs-trash"></i></button></td>';
-        tableHTML += '</tr>';
-    }
-    tableHTML += '</tbody>';
-    tableHTML += '</table>';
-
-    // Update hidden input value
-    var hiddenInput = document.getElementById("rowCountInput");
-    if (hiddenInput) {
-        hiddenInput.value = selectedRowCount;
-    }
-
-    document.getElementById("tableContainer").innerHTML = tableHTML;
-}
-
-
-
-function deleteRow(row) {
-    var table = document.getElementById("dataTable");
-    table.deleteRow(row.rowIndex);
-    rowCount--;
-}
-
-function toggleSelectAll() {
-    var checkboxes = document.getElementsByName("deleteCheckbox");
-    var selectAllCheckbox = document.getElementById("selectAllCheckbox");
-
-    for (var i = 0; i < checkboxes.length; i++) {
-        checkboxes[i].checked = selectAllCheckbox.checked;
-    }
-}
-
-function submitForm() {
-    var selectedRowsData = getSelectedRowsData();
-    var confirmation = confirm("You have selected " + selectedRowsData.length + " row(s) to be submitted.\n\nDo you want to proceed?");
-    
-    if (confirmation) {
-        // User clicked "OK", submit the form
-        document.getElementById('table-form').submit();
-    } else {
-        // User clicked "Cancel", do nothing
-    }
-}
-
-function getSelectedRowsData() {
-    var checkboxes = document.getElementsByName('deleteCheckbox');
-    var selectedRowsData = [];
-
-    for (var i = 0; i < checkboxes.length; i++) {
-        if (checkboxes[i].checked) {
-            var row = checkboxes[i].parentNode.parentNode;
-            var inputs = row.querySelectorAll('input[type="text"], input[type="date"]');
-            var rowData = {};
-
-            for (var j = 0; j < inputs.length; j++) {
-                rowData[inputs[j].name] = inputs[j].value;
-            }
-
-            selectedRowsData.push(rowData);
-        }
-    }
-
-    return selectedRowsData;
-}
-
-function showPopup() {
-    var selectedRowsData = getSelectedRowsData();
-    populatePopupTable(selectedRowsData);
-    document.getElementById('popupContainer').style.display = 'block';
-}
-
-function populatePopupTable(data) {
-    var table = document.getElementById('popupTable');
-    table.innerHTML = ''; // Clear existing content
-
-    // Create table header
-    var thead = document.createElement('thead');
-    var headerRow = document.createElement('tr');
-    var columnNames = Object.keys(data[0]); // Assuming all rows have the same keys
-    columnNames.forEach(function (columnName) {
-        var th = document.createElement('th');
-        th.textContent = columnName;
-        headerRow.appendChild(th);
-    });
-    thead.appendChild(headerRow);
-    table.appendChild(thead);
-
-    // Create table body
-    var tbody = document.createElement('tbody');
-    data.forEach(function (rowData) {
-        var row = document.createElement('tr');
-        columnNames.forEach(function (columnName) {
-            var td = document.createElement('td');
-            td.textContent = rowData[columnName];
-            row.appendChild(td);
-        });
-        tbody.appendChild(row);
-    });
-    table.appendChild(tbody);
-}
-
-
-function confirmSubmit() {
-    var selectedRowsData = getSelectedRowsData();
-    var confirmation = confirm("You have selected the following rows to be submitted:\n\n" + formatRowsForDisplay(selectedRowsData) + "\n\nDo you want to proceed?");
-
-    if (confirmation) {
-        // User clicked "OK", submit the form
-        document.getElementById('table-form').submit();
-    } else {
-        // User clicked "Cancel", hide the pop-up
-        hidePopup();
-    }
-}
-
-function formatRowsForDisplay(rowsData) {
-    var formattedRows = "";
-    rowsData.forEach(function (rowData, index) {
-        formattedRows += "Row " + (index + 1) + ":\n";
-        for (var key in rowData) {
-            if (rowData.hasOwnProperty(key)) {
-                formattedRows += key + ": " + rowData[key] + "\n";
-            }
-        }
-        formattedRows += "\n";
-    });
-    return formattedRows;
-}
-
 </script>
-{{common_elements_end()}}
+  </body>
+</html>
