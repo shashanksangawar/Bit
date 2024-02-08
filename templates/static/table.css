@@ -110,3 +110,8 @@ input[type="date"],select {
     border: none;
 }
 
+.popup-form
+{
+    display: flex;
+    gap: 10px;
+}

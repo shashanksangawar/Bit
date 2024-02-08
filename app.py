@@ -41,6 +41,7 @@ def fixed_deposits():
 @app.route('/calculate_fd',  methods=['POST'])
 def calculate_fd():
     form = request.form
+    print(form)
     try:
         line_labels, principal_amounts, slice_interest ,principal, values, slices, current_evaluation_interest, total_interest = fd_calculate(form)
         amount = float(principal) + total_interest.item()
@@ -74,6 +75,13 @@ def calculate_fds():
 @app.route("/test")
 def test():
     return "Test Approved from Finoplex"
+
+
+@app.route('/submit_form', methods=['POST'])
+def handle_form_submission():
+    data = request.form
+    print(data)
+    return jsonify(data)
 
 
 if __name__ == '__main__':

@@ -13,6 +13,9 @@
       rel="stylesheet"
     />
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
 
@@ -31,12 +34,8 @@
           <div class="table-form">
             <div class="table-buttons">
               <button onclick="addRow()" class="table-event">Add Row</button>
-              <input
-                type="submit"
-                value="Calculate"
-                onclick="showPopup(); return false;"
-                class="table-event"
-              />
+              <button onclick="showPopup()" id='popup-button' class="table-event">Verify</button>
+              
             </div>
             <div id="tableContainer"></div>
           </div>
@@ -76,34 +75,35 @@
         document.getElementById("tableContainer").innerHTML += tablehtml;
     }
 
-      function createTablewithHeader(id) {
-        var tablehtml = "";
+    function createTablewithHeader(id) 
+    {
+      var tablehtml = "";
 
-        // Header
-        tablehtml += "<div class='header'>";
-        tablehtml += "<span class='headers'>Principal</span>";
-        tablehtml += '<span class="headers">Interest Rate (%)</span>';
-        tablehtml += '<span class="headers">Start Date of Deposit</span>';
-        tablehtml += '<span class="headers">Maturity Date of Deposit</span>';
-        tablehtml += '<span class="headers">Compounding</span>';
-        tablehtml += '<span class="headers">Interest Payout Period</span>';
-        tablehtml += '<span class="headers">Action</span>';
-        tablehtml += "";
-        tablehtml += "</div>";
+      // Header
+      tablehtml += "<div class='header'>";
+      tablehtml += "<span class='headers'>Principal</span>";
+      tablehtml += '<span class="headers">Interest Rate (%)</span>';
+      tablehtml += '<span class="headers">Start Date of Deposit</span>';
+      tablehtml += '<span class="headers">Maturity Date of Deposit</span>';
+      tablehtml += '<span class="headers">Compounding</span>';
+      tablehtml += '<span class="headers">Interest Payout Period</span>';
+      tablehtml += '<span class="headers">Action</span>';
+      tablehtml += "";
+      tablehtml += "</div>";
 
-        // Row
-        tablehtml += "<div id='" + id + "' class='calculator-table'>";
-        tablehtml += "<input type='text' class='inputs' id='start' name='principal' placeholder='Principal' required>";
-        tablehtml += '<input type="text" class="inputs" id="rate" name="rate" placeholder="Interest Rate (%)" required>';
-        tablehtml += '<input type="date" class="inputs" id="start" name="start" placeholder="Start Date of Deposit" required>';
-        tablehtml += '<input type="date" class="inputs" id="maturity" name="maturity" placeholder="Maturity Date of Deposit" required>';
-        tablehtml += '<select name="compound" id="compounding" required class="select"><option value="0">No Compounding</option><option value="1">Yearly</option><option value="2">Half-Yearly</option><option value="3">Four-Monthly</option><option value="4">Quarterly</option><option value="6">Bi-Monthly</option><option value="12">Monthly</option></select>';
-        tablehtml += '<select name="payout" id="payout" required class="select"><option value="0">On Maturity</option><option value="1">Yearly</option><option value="2">Half-Yearly</option><option value="3">Four-Monthly</option><option value="4">Quarterly</option><option value="6">Bi-Monthly</option><option value="12">Monthly</option></select>';
-        tablehtml += '&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="action" name="deleteCheckbox" checked>';
-        tablehtml += '&nbsp;&nbsp;<button class="delete-btn" class="action" onclick="deleteRow(' + id + ')"><i class="bx bxs-trash"></i></button>';
-        tablehtml += "</div>";
-        document.getElementById("tableContainer").innerHTML += tablehtml;
-      }
+      // Row
+      tablehtml += "<div id='" + id + "' class='calculator-table'>";
+      tablehtml += "<input type='text' class='inputs' id='start' name='principal' placeholder='Principal' required>";
+      tablehtml += '<input type="text" class="inputs" id="rate" name="rate" placeholder="Interest Rate (%)" required>';
+      tablehtml += '<input type="date" class="inputs" id="start" name="start" placeholder="Start Date of Deposit" required>';
+      tablehtml += '<input type="date" class="inputs" id="maturity" name="maturity" placeholder="Maturity Date of Deposit" required>';
+      tablehtml += '<select name="compound" id="compounding" required class="select"><option value="0">No Compounding</option><option value="1">Yearly</option><option value="2">Half-Yearly</option><option value="3">Four-Monthly</option><option value="4">Quarterly</option><option value="6">Bi-Monthly</option><option value="12">Monthly</option></select>';
+      tablehtml += '<select name="payout" id="payout" required class="select"><option value="0">On Maturity</option><option value="1">Yearly</option><option value="2">Half-Yearly</option><option value="3">Four-Monthly</option><option value="4">Quarterly</option><option value="6">Bi-Monthly</option><option value="12">Monthly</option></select>';
+      tablehtml += '&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="action" name="deleteCheckbox" checked>';
+      tablehtml += '&nbsp;&nbsp;<button class="delete-btn" class="action" onclick="deleteRow(' + id + ')"><i class="bx bxs-trash"></i></button>';
+      tablehtml += "</div>";
+      document.getElementById("tableContainer").innerHTML += tablehtml;
+    }
 
     function deleteRow(id)
     {
@@ -111,6 +111,90 @@
         var row = document.getElementById(id);
         row.parentNode.removeChild(row);
     }
+	
+	
+	function showPopup() {
+		var checkedDivs = [];
+		$('#tableContainer div[id]').each(function() {
+			var checkboxes = $('input[type="checkbox"]', this);
+			if (checkboxes.filter(':checked').length > 0) {
+				checkedDivs.push(this.id);
+			}
+		});
+	
+		if (checkedDivs.length > 0) {
+			var popupHtml = '';
+			checkedDivs.forEach(function(divId) {
+				var div = $('#' + divId);
+				var inputs = div.find('input, select');
+				inputs.each(function() {
+					var input = $(this);
+					var name = input.attr('name');
+					var type = input.attr('type');
+					var classname = input.attr('class');
+					var value = input.val();
+					var disabledInput = '';
+	
+					if (type === 'text' || type === 'date') {
+						disabledInput = '<input type="text" id="' + name + '" name="' + name + '" value="' + value + '"class="' + classname + '" disabled>';
+					} else if (name === 'compound' || name === 'payout') {
+						disabledInput = '<select name="' + name + '">';
+						input.find('option').each(function() {
+							var optionValue = $(this).val();
+							var selected = optionValue === value ? 'selected' : '';
+							disabledInput += '<option value="' + optionValue + '" ' + selected + ' disabled>' + $(this).text() + '</option>';
+						});
+						disabledInput += '</select>';
+					}
+					popupHtml += disabledInput + '</br>';
+				});
+			});
+	
+			var form = $('<form class="popup-form"></form>');
+			form.attr('method', 'post');
+			form.html(popupHtml);
+	
+			var submitButton = $('<input type="submit" value="Calculate" formaction="/submit_form" class="input-button">');
+			form.append(submitButton);
+			
+			var dialog = $('<div></div>').html(form).dialog({
+				width: 'auto',
+				height: 'auto',
+				dialogClass: 'popup-dialog',
+				position: {
+					my: 'center',
+					at: 'center',
+					of: window
+				}
+			});
+	
+			// Submit the form data using AJAX
+			//form.on('submit', function(e) {
+			//	e.preventDefault();
+			//	var formData = $(this).serializeArray();
+			//	$.ajax({
+			//		url: '/submit_form',
+			//		method: 'POST',
+			//		data: formData,
+			//		success: function(response) {
+			//			console.log('Form submitted successfully!');
+			//			dialog.dialog('close');
+			//		},
+			//		error: function(error) {
+			//			console.log('Error submitting form:', error);
+			//		}
+			//	});
+			//});
+		} else {
+			console.log('No checked divs found!');
+		}
+	}
+	// Call the showPopup() function when the button is clicked
+	$('#popup-button').click(function() {
+		showPopup();
+	});
+
+
 </script>
   </body>
 </html>
